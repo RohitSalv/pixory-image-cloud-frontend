@@ -1,59 +1,84 @@
-# Gallary
+# Pixory – Image Cloud Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.8.
+Pixory is a modern frontend application that provides a clean interface for uploading, browsing, and managing AI-enriched images.
 
-## Development server
+This repository contains the user-facing application built to consume the Pixory backend APIs.
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+## Responsibilities
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- Image upload interface with preview
+- Responsive image gallery
+- Display of AI-generated descriptions and tags
+- Landing page and product flow
+- User interaction and feedback handling
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Tech Stack
 
-```bash
-ng generate component component-name
-```
+- Angular 20+
+- Tailwind CSS v4
+- RxJS
+- Angular Animations
+- Lucide Angular Icons
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## UX Philosophy
 
-## Building
+Pixory follows a "single-flow" design approach where the landing experience transitions seamlessly into the application dashboard.
 
-To build the project run:
+Design principles:
+- Minimal visual noise
+- Calm feedback over aggressive loaders
+- Dark-mode-first UI
+- Clear visual hierarchy
 
-```bash
-ng build
-```
+---
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Key UI Decisions
 
-## Running unit tests
+### Why No Upload Progress Bar?
+For small-to-medium image uploads, progress bars added unnecessary complexity without improving clarity. A buffered success/error state provided a calmer and more intentional experience.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### Why CSS Grid Instead of Flexbox?
+CSS Grid enabled responsive layouts without forcing uniform card heights, allowing image content to dictate layout naturally.
 
-```bash
-ng test
-```
+### Why Strong Typing in Templates?
+Typed interfaces prevent runtime template errors and improve maintainability as the data model evolves.
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## Application Flow
 
-```bash
-ng e2e
-```
+1. User uploads an image
+2. Local preview is shown instantly using FileReader
+3. Image is sent to the backend API
+4. Gallery updates with AI-enriched metadata
+5. Users can browse, view, and manage images
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## Backend Dependency
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+This frontend consumes the Pixory backend REST APIs.
+
+Backend repository:
+👉 https://github.com/RohitSalv/pixory-image-cloud-backend
+
+---
+
+## Project Status
+
+- Landing page & UI flow: ✅ Complete
+- Image gallery: ✅ Stable
+- Upload interface: ✅ Optimized
+- Advanced search & filters: 🚧 Planned
+
+---
+
+## License
+
+This project is intended for learning, portfolio demonstration, and experimentation.
