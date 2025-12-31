@@ -1,0 +1,58 @@
+<footer class="border-t border-border/50 px-6 py-10 bg-background/50 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-5 gap-12 mb-10">
+
+            <div class="md:col-span-1 space-y-4">
+                <div class="flex items-center gap-2">
+                    <div
+                        class="p-2 rounded-lg bg-gradient-to-br from-blue-500/10 to-violet-500/10 border border-blue-500/10">
+                        <lucide-icon [name]="icons.Sparkles" class="h-5 w-5 text-foreground"></lucide-icon>
+                    </div>
+                    <span class="text-xl font-bold tracking-tight">Pixory</span>
+                </div>
+                <p class="text-sm text-muted-foreground leading-relaxed">
+                    Your private photo cloud that understands your images.
+                </p>
+
+                <div class="flex gap-3">
+                    <a href="#"
+                        class="p-2 rounded-lg bg-card/40 border border-border/50 hover:border-blue-500/50 hover:bg-card/80 transition-all"
+                        aria-label="GitHub">
+                        <lucide-icon [name]="icons.Github" class="h-4 w-4 text-muted-foreground"></lucide-icon>
+                    </a>
+                    <a href="#"
+                        class="p-2 rounded-lg bg-card/40 border border-border/50 hover:border-blue-500/50 hover:bg-card/80 transition-all"
+                        aria-label="Twitter">
+                        <lucide-icon [name]="icons.Twitter" class="h-4 w-4 text-muted-foreground"></lucide-icon>
+                    </a>
+                    <a href="#"
+                        class="p-2 rounded-lg bg-card/40 border border-border/50 hover:border-blue-500/50 hover:bg-card/80 transition-all"
+                        aria-label="LinkedIn">
+                        <lucide-icon [name]="icons.Linkedin" class="h-4 w-4 text-muted-foreground"></lucide-icon>
+                    </a>
+                </div>
+            </div>
+
+            <div *ngFor="let category of categories" class="space-y-4">
+                <h4 class="font-semibold text-sm uppercase tracking-wider text-foreground">{{ category }}</h4>
+                <ul class="space-y-2">
+                    <li *ngFor="let item of links[category]">
+                        <a href="#" class="text-sm text-muted-foreground hover:text-blue-400 transition-colors">
+                            {{ item }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div
+            class="pt-8 border-t border-border/20 flex flex-col md:row justify-between items-center gap-4 text-xs text-muted-foreground">
+            <p>© 2025 Pixory. All rights reserved.</p>
+            <div class="flex gap-6">
+                <a href="#" class="hover:text-foreground transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-foreground transition-colors">Terms of Service</a>
+                <a href="#" class="hover:text-foreground transition-colors">Cookie Settings</a>
+            </div>
+        </div>
+    </div>
+</footer>

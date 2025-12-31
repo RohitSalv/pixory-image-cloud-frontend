@@ -1,1 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'tailwindcss';
+
+
+@theme {
+    /* Mapping the variable names to specific colors */
+    --color-background: hsl(240 10% 3.9%);
+    --color-foreground: hsl(0 0% 98%);
+
+    --color-border: hsl(240 3.7% 15.9%);
+
+    --color-muted: hsl(240 3.7% 15.9%);
+    --color-muted-foreground: hsl(240 5% 64.9%);
+
+    --color-accent: hsl(240 3.7% 15.9%);
+    --color-accent-foreground: hsl(0 0% 98%);
+
+    /* Animation for your Hero blobs */
+    @keyframes blob {
+
+        0%,
+        100% {
+            transform: scale(1);
+            opacity: 0.2;
+        }
+
+        50% {
+            transform: scale(1.2);
+            opacity: 0.3;
+        }
+    }
+
+    --animate-blob: blob 10s infinite;
+}
+
+@layer base {
+    body {
+        /* This ensures the "single flow" background color */
+        @apply bg-background text-foreground antialiased;
+        margin: 0;
+    }
+}

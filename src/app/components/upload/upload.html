@@ -1,0 +1,54 @@
+<p class="upload-title text-sm uppercase tracking-widest text-blue-400 font-bold mb-4 px-2">
+    Upload
+</p>
+
+<div class="upload-container bg-card/30 backdrop-blur-xl border border-border/40 rounded-3xl p-8 space-y-6 shadow-2xl">
+    <h2 class="text-2xl font-bold text-foreground">Upload File</h2>
+
+    <label
+        class="relative group flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-border/50 rounded-2xl cursor-pointer hover:border-blue-500/50 transition-all bg-background/20">
+        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+            <lucide-icon [name]="icons.UploadCloud"
+                class="w-10 h-10 text-muted-foreground mb-3 group-hover:text-blue-400 transition-colors"></lucide-icon>
+            <p class="text-sm text-muted-foreground">Click to select or drag and drop</p>
+        </div>
+        <input type="file" accept="image/*" class="hidden" (change)="onFileSelected($event)" />
+    </label>
+
+    @if (previewUrl) {
+    <div class="preview animate-in zoom-in-95 duration-300">
+        <div class="relative mx-auto max-w-[300px] p-2 bg-white/5 border border-white/10 rounded-xl shadow-2xl">
+            <img [src]="previewUrl" alt="Preview" class="rounded-lg w-full h-48 object-cover" />
+            <div
+                class="absolute bottom-4 left-4 right-4 bg-black/60 backdrop-blur-md p-2 rounded-lg border border-white/10">
+                <p class="text-[10px] text-white/80 truncate font-mono">{{ fileName }}</p>
+            </div>
+        </div>
+    </div>
+    }
+
+    @if (uploading) {
+    <div
+        class="buffer flex flex-col items-center justify-center gap-3 p-4 bg-blue-500/5 border border-blue-500/20 rounded-2xl">
+        <lucide-icon [name]="icons.Loader2" class="h-6 w-6 text-blue-400 animate-spin"></lucide-icon>
+        <span class="text-sm font-medium text-blue-400">Uploading… please wait</span>
+    </div>
+    }
+
+    <button (click)="uploadFile()" [disabled]="!selectedFile || uploading"
+        class="w-full py-4 px-6 rounded-2xl font-bold text-white bg-gradient-to-r from-blue-600 to-violet-600 hover:opacity-90 disabled:opacity-20 disabled:cursor-not-allowed transition-all shadow-lg shadow-blue-500/20 flex items-center justify-center gap-2">
+        @if (uploading) {
+        <lucide-icon [name]="icons.Loader2" class="h-4 w-4 animate-spin"></lucide-icon>
+        Uploading…
+        } @else {
+        Upload & Save
+        }
+    </button>
+
+    @if (fileName && !uploading) {
+    <div class="flex items-center gap-2 justify-center text-xs text-muted-foreground">
+        <lucide-icon [name]="icons.ImageIcon" class="h-3 w-3"></lucide-icon>
+        <span>Selected File: {{ fileName }}</span>
+    </div>
+    }
+</div>

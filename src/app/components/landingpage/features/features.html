@@ -1,0 +1,28 @@
+<section class="px-6 py-10">
+    <div class="max-w-7xl mx-auto" [@staggerFade]>
+
+        <div class="text-center mb-10">
+            <h2 class="text-3xl md:text-4xl font-bold mb-3">Core Features</h2>
+            <p class="text-lg text-muted-foreground">Everything you need for intelligent photo management</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+            <div *ngFor="let feature of features"
+                class="feature-card group relative p-8 bg-card/40 backdrop-blur-md border border-border/40 rounded-2xl hover:border-border/80 transition-all duration-300">
+                <div class="space-y-4 relative z-10">
+                    <div [ngClass]="['inline-flex p-3 rounded-xl bg-gradient-to-br', feature.gradient]">
+                        <lucide-icon [name]="feature.icon" class="h-6 w-6 text-foreground"></lucide-icon>
+                    </div>
+                    <h3 class="text-xl font-semibold">{{ feature.title }}</h3>
+                    <p class="text-muted-foreground leading-relaxed">
+                        {{ feature.description }}
+                    </p>
+                </div>
+
+                <div
+                    class="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-500/0 to-violet-500/0 group-hover:from-blue-500/10 group-hover:to-violet-500/10 transition-all duration-500 -z-0">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,37 @@
+<section class="px-6 py-10">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-10">
+            <h2 class="text-3xl md:text-4xl font-bold mb-3">Privacy & Control</h2>
+            <p class="text-lg text-muted-foreground">
+                Your memories are precious. We treat them that way.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6 mb-10">
+            <div *ngFor="let feature of privacyFeatures"
+                class="flex gap-4 p-6 bg-card/40 backdrop-blur-md border border-border/40 rounded-2xl hover:border-border/80 transition-all duration-300 group">
+                <div class="flex-shrink-0">
+                    <div
+                        class="p-3 rounded-xl bg-gradient-to-br from-blue-500/10 to-violet-500/10 border border-blue-500/10 group-hover:border-blue-500/30 transition-colors">
+                        <lucide-icon [name]="feature.icon" class="h-5 w-5 text-foreground"></lucide-icon>
+                    </div>
+                </div>
+                <div class="space-y-1">
+                    <h3 class="font-semibold text-foreground">{{ feature.title }}</h3>
+                    <p class="text-sm text-muted-foreground leading-relaxed">{{ feature.description }}</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div
+            class="text-center max-w-3xl mx-auto p-8 bg-gradient-to-br from-blue-500/5 to-violet-500/5 border border-border/50 rounded-3xl backdrop-blur-sm shadow-xl shadow-blue-500/5">
+            <p class="text-lg text-muted-foreground leading-relaxed italic">
+                "We built Pixory because we were tired of choosing between convenience and privacy.
+                You shouldn't have to give up your data to get intelligent photo search.
+                With Pixory, you get both."
+            </p>
+            <p class="mt-6 text-sm font-semibold tracking-wide uppercase text-foreground/80">— The Pixory Team</p>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,64 @@
+<section class="relative px-6 py-16 overflow-hidden">
+    <div class="absolute inset-0 -z-10 pointer-events-none">
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-[120px] animate-blob">
+        </div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-violet-500/10 rounded-full blur-[120px] animate-blob"
+            style="animation-delay: 4s;"></div>
+    </div>
+
+    <div class="max-w-4xl mx-auto text-center space-y-8" [@fadeUp]>
+        <h2 class="text-4xl md:text-6xl font-bold tracking-tight leading-tight">
+            Stop losing photos. <br class="hidden md:block" />
+            <span class="bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent">
+                Start finding memories.
+            </span>
+        </h2>
+
+        <p class="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            Join thousands of users who've already discovered the future of photo management.
+        </p>
+
+        <div class="flex flex-wrap gap-4 justify-center pt-4">
+            <button
+                class="inline-flex items-center justify-center px-8 py-4 text-sm font-semibold text-white transition-all rounded-full bg-gradient-to-r from-blue-600 to-violet-600 hover:opacity-90 shadow-[0_0_25px_rgba(37,99,235,0.4)] group">
+                Create Your Pixory
+                <lucide-icon [name]="icons.ArrowRight"
+                    class="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform"></lucide-icon>
+            </button>
+
+            <button
+                class="inline-flex items-center justify-center px-8 py-4 text-sm font-semibold border border-border bg-background/50 backdrop-blur-sm rounded-full hover:bg-accent transition-colors">
+                <lucide-icon [name]="icons.Github" class="mr-2 h-5 w-5"></lucide-icon>
+                View on GitHub
+            </button>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-12 pt-12 text-sm border-t border-border/20">
+            <div class="space-y-1">
+                <div
+                    class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent">
+                    100k+
+                </div>
+                <div class="text-muted-foreground font-medium uppercase tracking-widest text-[10px]">Photos Analyzed
+                </div>
+            </div>
+
+            <div class="space-y-1">
+                <div
+                    class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent">
+                    10k+
+                </div>
+                <div class="text-muted-foreground font-medium uppercase tracking-widest text-[10px]">Active Users</div>
+            </div>
+
+            <div class="space-y-1">
+                <div
+                    class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent">
+                    99.9%
+                </div>
+                <div class="text-muted-foreground font-medium uppercase tracking-widest text-[10px]">Uptime</div>
+            </div>
+        </div>
+    </div>
+</section>

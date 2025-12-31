@@ -1,0 +1,24 @@
+<section class="px-6 py-10 border-y border-border/50 bg-background/20 backdrop-blur-sm">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-8">
+            <h3 class="text-xs uppercase tracking-widest text-muted-foreground mb-2">The Tech Stack</h3>
+            <p class="text-lg font-medium text-foreground/80">Built with modern, proven technology</p>
+        </div>
+
+
+        <div class="flex flex-wrap justify-center gap-12">
+            <div *ngFor="let item of stack" class="flex flex-col items-center gap-3 group cursor-default">
+                <div
+                    class="p-4 rounded-2xl bg-card/40 border border-border/40 group-hover:border-blue-500/50 group-hover:bg-card/60 transition-all duration-300 shadow-sm">
+                    <lucide-icon [name]="item.icon"
+                        class="h-8 w-8 text-muted-foreground group-hover:text-blue-400 transition-colors duration-300"></lucide-icon>
+                </div>
+
+                <div class="text-center">
+                    <p class="font-semibold text-sm text-foreground tracking-tight">{{ item.label }}</p>
+                    <p class="text-[10px] uppercase tracking-wider text-muted-foreground/80">{{ item.tech }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
