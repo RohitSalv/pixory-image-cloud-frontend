@@ -1,7 +1,7 @@
 import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +10,8 @@ export class AuthService {
   private apiUrl = 'http://localhost:8092/api/auth';
   private token: string | null = null;
   private isBrowser: boolean;
+  private _isAuthenticated = new BehaviorSubject<boolean>(false);
+  isAuthenticated$ = this._isAuthenticated.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -18,6 +20,7 @@ export class AuthService {
     this.isBrowser = isPlatformBrowser(this.platformId);
     if (this.isBrowser) {
       this.token = localStorage.getItem('authToken');
+      this._isAuthenticated.next(!!this.token);
     }
   }
 
@@ -25,6 +28,7 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/login`, credentials).pipe(
       tap((response: any) => {
         this.setToken(response.token);
+        this._isAuthenticated.next(true);
       })
     );
   }
@@ -38,6 +42,7 @@ export class AuthService {
     if (this.isBrowser) {
       localStorage.setItem('authToken', token);
     }
+    this._isAuthenticated.next(true);
   }
 
   getToken(): string | null {
@@ -59,5 +64,7 @@ export class AuthService {
     if (this.isBrowser) {
       localStorage.removeItem('authToken');
     }
+    this._isAuthenticated.next(false);
   }
 }
+

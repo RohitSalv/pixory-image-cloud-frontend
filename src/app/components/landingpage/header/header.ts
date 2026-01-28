@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { LucideAngularModule, Sparkles } from 'lucide-angular';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -23,19 +24,43 @@ import { AuthService } from '../../../services/auth/auth.service';
     ])
   ]
 })
-export class Header {
+export class Header implements OnDestroy {
 
   readonly SparklesIcon = Sparkles;
 
-  navLinks = [
-    { name: 'Home', href: '/home', isRouterLink: true },
-    { name: 'Features', href: 'features', isRouterLink: false },
-    { name: 'How It Works', href: 'how-it-works', isRouterLink: false },
-    { name: 'Pricing', href: 'pricing', isRouterLink: false },
-    { name: 'Docs', href: 'docs', isRouterLink: false }
-  ];
+  navLinks: { name: string; href: string; isRouterLink: boolean }[] = [];
+  private authSubscription: Subscription;
 
-  constructor(public authService: AuthService, private router: Router) {}
+  constructor(public authService: AuthService, private router: Router) {
+    this.updateNavLinks();
+    this.authSubscription = this.authService.isAuthenticated$.subscribe(() => {
+      this.updateNavLinks();
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe();
+    }
+  }
+
+  updateNavLinks() {
+    if (this.authService.isAuthenticated()) {
+      this.navLinks = [
+        { name: 'Home', href: '/home', isRouterLink: true },
+        { name: 'Explore', href: '/explore', isRouterLink: true },
+        { name: 'Upload', href: '/upload', isRouterLink: true },
+        { name: 'Docs', href: '/docs', isRouterLink: true }
+      ];
+    } else {
+      this.navLinks = [
+        { name: 'Home', href: '/home', isRouterLink: true },
+        { name: 'Features', href: 'features', isRouterLink: false },
+        { name: 'How It Works', href: 'how-it-works', isRouterLink: false },
+        { name: 'Docs', href: '/docs', isRouterLink: true }
+      ];
+    }
+  }
 
   scrollTo(sectionId: string) {
     requestAnimationFrame(() => {
