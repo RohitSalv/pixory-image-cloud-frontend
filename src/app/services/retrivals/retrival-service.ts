@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class RetrivalService {
 
-  private apiUrl = 'http://localhost:8092/api/v1/files/all';
+  private apiUrl = 'http://localhost:8092/api/v1/files/me';
 
   constructor(private http: HttpClient) { }
 

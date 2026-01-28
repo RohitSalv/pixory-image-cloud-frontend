@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { LucideAngularModule, ArrowRight, Shield, Lock, Check } from 'lucide-angular';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule],
+  imports: [CommonModule, LucideAngularModule, RouterLink],
   templateUrl: './hero.html',
   animations: [
     trigger('fadeUp', [

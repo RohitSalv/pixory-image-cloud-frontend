@@ -1,0 +1,99 @@
+<div class="relative min-h-screen flex items-center justify-center px-6 py-12 overflow-hidden bg-background">
+    <div class="absolute inset-0 -z-10 pointer-events-none">
+        <div
+            class="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-[120px] animate-blob">
+        </div>
+        <div class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-violet-500/10 rounded-full blur-[120px] animate-blob"
+            style="animation-delay: 3s;"></div>
+    </div>
+
+    <div [@fadeInScale]
+        class="w-full max-w-md bg-card/40 backdrop-blur-2xl border border-border/40 rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative z-10">
+
+        <div class="mb-10">
+            <button routerLink="/"
+                class="group flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-6">
+                <lucide-icon [name]="icons.ChevronLeft"
+                    class="h-5 w-5 group-hover:-translate-x-1 transition-transform"></lucide-icon>
+            </button>
+            <h1 class="text-3xl font-bold tracking-tight mb-3 uppercase">Create Your Account</h1>
+            <p class="text-muted-foreground text-sm leading-relaxed">
+                Join our community. Create an account to get started.
+            </p>
+        </div>
+
+        <form [formGroup]="registerForm" (submit)="onSubmit()" class="space-y-6">
+            <div class="space-y-2">
+                <label for="email"
+                    class="block text-xs font-medium text-muted-foreground uppercase tracking-wider ml-1">Email
+                    Address</label>
+                <input type="email" id="email" placeholder="example@pixory.com" formControlName="email"
+                    class="w-full bg-background/50 border border-border/50 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 transition-all placeholder:text-muted-foreground/30" />
+                <div *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)" class="text-red-400 text-xs ml-1">
+                  <div *ngIf="registerForm.get('email')?.errors?.['required']">Email is required.</div>
+                  <div *ngIf="registerForm.get('email')?.errors?.['email']">Please enter a valid email.</div>
+                </div>
+            </div>
+
+            <div class="space-y-2">
+                <label for="password"
+                    class="block text-xs font-medium text-muted-foreground uppercase tracking-wider ml-1">Password</label>
+                <div class="relative">
+                    <input [type]="showPassword ? 'text' : 'password'" id="password" placeholder="••••••••" formControlName="password"
+                        class="w-full bg-background/50 border border-border/50 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 transition-all placeholder:text-muted-foreground/30" />
+                    <button type="button" (click)="showPassword = !showPassword"
+                        class="absolute right-5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors">
+                        <lucide-icon [name]="showPassword ? icons.EyeOff : icons.Eye" class="h-5 w-5"></lucide-icon>
+                    </button>
+                </div>
+                <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)" class="text-red-400 text-xs ml-1">
+                  <div *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</div>
+                  <div *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters long.</div>
+                </div>
+            </div>
+
+            <button type="submit" [disabled]="registerForm.invalid"
+                class="w-full py-4 rounded-2xl font-bold text-white bg-gradient-to-r from-blue-600 to-violet-600 hover:opacity-90 shadow-[0_0_20px_rgba(37,99,235,0.3)] transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed">
+                Create Account
+            </button>
+
+            <p class="text-center text-sm text-muted-foreground">
+                Already have an account?
+                <a routerLink="/login" class="text-blue-400 font-semibold hover:underline">Log In</a>
+            </p>
+        </form>
+
+
+        <div class="mt-10">
+            <div class="relative flex items-center justify-center mb-8">
+                <div class="absolute inset-0 flex items-center">
+                    <div class="w-full border-t border-border/30"></div>
+                </div>
+                <span
+                    class="relative px-4 bg-transparent text-[10px] uppercase tracking-widest text-muted-foreground/60">
+                    Or continue with
+                </span>
+            </div>
+
+            <div class="flex justify-center gap-6">
+                <button
+                    class="p-4 rounded-full bg-background/50 border border-border/50 hover:border-blue-500/50 hover:bg-blue-500/5 transition-all group">
+                    <lucide-icon [name]="icons.Mail"
+                        class="h-5 w-5 text-muted-foreground group-hover:text-blue-400"></lucide-icon>
+                </button>
+
+                <button
+                    class="p-4 rounded-full bg-background/50 border border-border/50 hover:border-foreground/50 hover:bg-foreground/5 transition-all group">
+                    <lucide-icon [name]="icons.Apple"
+                        class="h-5 w-5 text-muted-foreground group-hover:text-foreground"></lucide-icon>
+                </button>
+
+                <button
+                    class="p-4 rounded-full bg-background/50 border border-border/50 hover:border-blue-600/50 hover:bg-blue-600/5 transition-all group">
+                    <lucide-icon [name]="icons.Facebook"
+                        class="h-5 w-5 text-muted-foreground group-hover:text-blue-600"></lucide-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

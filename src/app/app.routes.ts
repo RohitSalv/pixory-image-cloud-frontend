@@ -1,6 +1,11 @@
 import { Routes } from '@angular/router';
 import { Main } from './components/landingpage/main/main';
 import { Home } from './components/home/home';
+import { Features } from './components/landingpage/features/features';
+import { HowItWorks } from './components/landingpage/how-it-works/how-it-works';
+import { Login } from './components/auth/login/login';
+import { Register } from './components/auth/register/register';
+import { AuthGuard } from './guards/auth.guard';
 
 
 export const routes: Routes = [
@@ -11,7 +16,24 @@ export const routes: Routes = [
     },
     {
         path: 'home',
-        component: Home
+        component: Home,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'features',
+        component: Features
+    },
+    {
+        path: 'how-it-works',
+        component: HowItWorks
+    },
+    {
+        path: 'login',
+        component: Login
+    },
+    {
+        path: 'register',
+        component: Register
     }
 
 ];

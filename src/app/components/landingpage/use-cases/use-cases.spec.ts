@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { UseCases } from './use-cases';
 
 describe('UseCases', () => {
@@ -8,9 +8,8 @@ describe('UseCases', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UseCases]
-    })
-    .compileComponents();
+      imports: [UseCases, NoopAnimationsModule],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(UseCases);
     component = fixture.componentInstance;

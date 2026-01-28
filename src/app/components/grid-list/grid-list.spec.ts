@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { GridList } from './grid-list';
 
 describe('GridList', () => {
@@ -8,9 +8,8 @@ describe('GridList', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GridList]
-    })
-    .compileComponents();
+      imports: [GridList, HttpClientTestingModule],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(GridList);
     component = fixture.componentInstance;
