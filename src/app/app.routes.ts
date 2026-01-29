@@ -8,6 +8,7 @@ import { Register } from './components/auth/register/register';
 import { AuthGuard } from './guards/auth.guard';
 import { DocsComponent } from './components/docs/docs.component';
 import { Upload } from './components/upload/upload';
+import { Search } from './components/search/search'; // Import the Search component
 
 
 export const routes: Routes = [
@@ -17,7 +18,7 @@ export const routes: Routes = [
         component: Main
     },
     {
-        path: 'home',
+        path: 'explore',
         component: Home,
         canActivate: [AuthGuard]
     },
@@ -44,6 +45,11 @@ export const routes: Routes = [
     {
         path: 'upload',
         component: Upload
+    },
+    {
+        path: 'search',
+        component: Search,
+        canActivate: [AuthGuard] // Assuming search requires authentication
     }
 
 ];

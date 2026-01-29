@@ -1,6 +1,6 @@
 import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http'; // Import HttpHeaders
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 @Injectable({
@@ -53,6 +53,12 @@ export class AuthService {
       return this.token;
     }
     return null;
+  }
+
+  // New method to get HttpHeaders with Authorization token
+  getAuthHeaders(): HttpHeaders {
+    const token = this.getToken();
+    return token ? new HttpHeaders().set('Authorization', `Bearer ${token}`) : new HttpHeaders();
   }
 
   isAuthenticated(): boolean {

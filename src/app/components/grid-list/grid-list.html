@@ -1,78 +1,86 @@
-<div class="gallery-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6">
-    @for (item of files; track item.id) {
-    <div
-        class="card group relative bg-card/30 backdrop-blur-md border border-border/40 rounded-3xl overflow-hidden hover:border-blue-500/50 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/10">
-
-        <div class="image-wrapper relative aspect-[4/3] overflow-hidden bg-muted/20">
-            <img [src]="item.filePath" [alt]="item.fileName"
-                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-
+<div class="gallery-container">
+    <div class="max-w-7xl mx-auto px-6 py-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            @for (item of files; track item.id) {
             <div
-                class="actions absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4 backdrop-blur-[2px]">
-                <button (click)="download(item.id)"
-                    class="p-3 rounded-full bg-white text-black hover:bg-blue-500 hover:text-white transition-all transform hover:scale-110 shadow-xl">
-                    <lucide-icon [name]="icons.Download" class="h-5 w-5"></lucide-icon>
-                </button>
-                <button (click)="delete(item.id)"
-                    class="p-3 rounded-full bg-white text-black hover:bg-red-500 hover:text-white transition-all transform hover:scale-110 shadow-xl">
-                    <lucide-icon [name]="icons.Trash2" class="h-5 w-5"></lucide-icon>
-                </button>
-            </div>
-        </div>
+                class="card group relative bg-card/30 backdrop-blur-md border border-border/40 rounded-3xl overflow-hidden hover:border-blue-500/50 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/10">
 
-        <div class="p-5 space-y-4">
-            <div
-                class="meta flex items-center gap-2 text-[10px] font-medium uppercase tracking-widest text-muted-foreground/80 overflow-hidden">
-                <span class="bg-muted/50 px-2 py-0.5 rounded">ID: {{ item.id }}</span>
-                <span class="w-1 h-1 rounded-full bg-border"></span>
-                <span class="truncate max-w-[100px]">{{ item.fileName }}</span>
-                <span class="w-1 h-1 rounded-full bg-border"></span>
-                <span class="flex items-center gap-1">
-                    <lucide-icon [name]="icons.Calendar" class="h-3 w-3"></lucide-icon>
-                    {{ item.uploadTime | date:'MMM d, y' }}
-                </span>
-            </div>
+                <div class="image-wrapper relative aspect-[4/3] overflow-hidden bg-muted/20">
+                    <img [src]="item.filePath" [alt]="item.fileName"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
 
-            <div class="section space-y-2">
-                <label class="text-[10px] font-bold uppercase text-blue-400 tracking-wider flex items-center gap-1">
-                    <lucide-icon [name]="icons.FileText" class="h-3 w-3"></lucide-icon>
-                    Description
-                </label>
-                <div
-                    class="box bg-background/40 border border-border/20 rounded-xl p-3 text-sm text-muted-foreground min-h-[60px] max-h-[100px] overflow-y-auto scrollbar-hide italic leading-relaxed">
-                    {{ item.description || 'No AI description generated yet...' }}
-                </div>
-            </div>
-
-            <div class="section space-y-2">
-                <label class="text-[10px] font-bold uppercase text-violet-400 tracking-wider flex items-center gap-1">
-                    <lucide-icon [name]="icons.Tag" class="h-3 w-3"></lucide-icon>
-                    AI Tags
-                </label>
-                <div class="tags flex flex-wrap gap-1.5">
-                    @if (item.tags?.length) {
-                    @for (tag of item.tags; track tag) {
-                    <span
-                        class="tag text-[10px] px-2.5 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 hover:bg-violet-500/20 transition-colors">
-                        {{ tag }}
-                    </span>
-                    }
-                    } @else {
-                    <div class="flex gap-2 w-full">
-                        <div class="h-4 w-12 bg-muted/20 rounded-full animate-pulse"></div>
-                        <div class="h-4 w-16 bg-muted/20 rounded-full animate-pulse"></div>
+                    <div
+                        class="actions absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4 backdrop-blur-[2px]">
+                        <button (click)="download(item.id)"
+                            class="p-3 rounded-full bg-white text-black hover:bg-blue-500 hover:text-white transition-all transform hover:scale-110 shadow-xl">
+                            <lucide-icon [name]="icons.Download" class="h-5 w-5"></lucide-icon>
+                        </button>
+                        <button (click)="delete(item.id)"
+                            class="p-3 rounded-full bg-white text-black hover:bg-red-500 hover:text-white transition-all transform hover:scale-110 shadow-xl">
+                            <lucide-icon [name]="icons.Trash2" class="h-5 w-5"></lucide-icon>
+                        </button>
                     </div>
-                    }
+                </div>
+
+                <div class="p-5 space-y-4">
+                    <div
+                        class="meta flex items-center gap-2 text-[10px] font-medium uppercase tracking-widest text-muted-foreground/80 overflow-hidden">
+                        <span class="bg-muted/50 px-2 py-0.5 rounded">ID: {{ item.id }}</span>
+                        <span class="w-1 h-1 rounded-full bg-border"></span>
+                        <span class="truncate max-w-[100px]">{{ item.fileName }}</span>
+                        <span class="w-1 h-1 rounded-full bg-border"></span>
+                        <span class="flex items-center gap-1">
+                            <lucide-icon [name]="icons.Calendar" class="h-3 w-3"></lucide-icon>
+                            {{ item.uploadTime | date:'MMM d, y' }}
+                        </span>
+                    </div>
+
+                    <div class="section space-y-2">
+                        <label
+                            class="text-[10px] font-bold uppercase text-blue-400 tracking-wider flex items-center gap-1">
+                            <lucide-icon [name]="icons.FileText" class="h-3 w-3"></lucide-icon>
+                            Description
+                        </label>
+                        <div
+                            class="box bg-background/40 border border-border/20 rounded-xl p-3 text-sm text-muted-foreground min-h-[60px] max-h-[100px] overflow-y-auto scrollbar-hide italic leading-relaxed">
+                            {{ item.description || 'No AI description generated yet...' }}
+                        </div>
+                    </div>
+
+                    <div class="section space-y-2">
+                        <label
+                            class="text-[10px] font-bold uppercase text-violet-400 tracking-wider flex items-center gap-1">
+                            <lucide-icon [name]="icons.Tag" class="h-3 w-3"></lucide-icon>
+                            AI Tags
+                        </label>
+                        <div class="tags flex flex-wrap gap-1.5">
+                            @if (item.tags?.length) {
+                            @for (tag of item.tags; track tag) {
+                            <span
+                                class="tag text-[10px] px-2.5 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 hover:bg-violet-500/20 transition-colors">
+                                {{ tag }}
+                            </span>
+                            }
+                            } @else {
+                            <div class="flex gap-2 w-full">
+                                <div class="h-4 w-12 bg-muted/20 rounded-full animate-pulse"></div>
+                                <div class="h-4 w-16 bg-muted/20 rounded-full animate-pulse"></div>
+                            </div>
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
+            } @empty {
+            <div class="col-span-full py-20 text-center">
+                <div class="inline-flex p-6 rounded-full bg-muted/10 border border-border/20 mb-4">
+                    <lucide-icon [name]="icons.FileText" class="h-10 w-10 text-muted-foreground/40"></lucide-icon>
+                </div>
+                <p class="text-muted-foreground">No memories found in your cloud.</p>
+            </div>
+            }
         </div>
     </div>
-    } @empty {
-    <div class="col-span-full py-20 text-center">
-        <div class="inline-flex p-6 rounded-full bg-muted/10 border border-border/20 mb-4">
-            <lucide-icon [name]="icons.FileText" class="h-10 w-10 text-muted-foreground/40"></lucide-icon>
-        </div>
-        <p class="text-muted-foreground">No memories found in your cloud.</p>
-    </div>
-    }
 </div>
+
+<app-footer></app-footer>

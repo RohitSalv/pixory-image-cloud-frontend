@@ -47,8 +47,8 @@ export class Header implements OnDestroy {
   updateNavLinks() {
     if (this.authService.isAuthenticated()) {
       this.navLinks = [
-        { name: 'Home', href: '/home', isRouterLink: true },
         { name: 'Explore', href: '/explore', isRouterLink: true },
+        { name: 'Search', href: '/search', isRouterLink: true },
         { name: 'Upload', href: '/upload', isRouterLink: true },
         { name: 'Docs', href: '/docs', isRouterLink: true }
       ];

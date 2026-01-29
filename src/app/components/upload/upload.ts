@@ -3,11 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FileUploadService } from '../../services/file-upload-service';
 import { UploadService } from '../../services/uploader/upload-service';
 import { LucideAngularModule, UploadCloud, ImageIcon, Loader2 } from 'lucide-angular';
+import { Header } from "../landingpage/header/header";
+import { Footer } from '../landingpage/footer/footer';
+import { HowItWorks } from "../landingpage/how-it-works/how-it-works";
 
 @Component({
   selector: 'app-upload',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule],
+  imports: [CommonModule, LucideAngularModule, Header, Footer, HowItWorks],
   templateUrl: './upload.html',
   styleUrl: './upload.css',
 })
