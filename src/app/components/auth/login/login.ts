@@ -17,7 +17,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { AuthService } from '../../../services/auth/auth.service';
+import { AuthService } from '../../../services/auth.service';
+import { ToastService } from '../../../services/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -50,7 +51,8 @@ export class Login {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -61,9 +63,24 @@ export class Login {
   onSubmit() {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe({
-        next: () => this.router.navigate(['/home']),
-        error: (err) => console.error(err),
+        next: () => {
+          this.toastService.success('Logged in successfully');
+          this.router.navigate(['/explore']);
+        },
+        error: (err) => {
+          console.error(err);
+          if (err.status === 401) {
+            this.toastService.error('Invalid email or password');
+          } else {
+            // Let the error interceptor handle other errors, or show a generic message if interceptor doesn't
+            // Since interceptor re-throws, we might not want to double-toast. 
+            // But if interceptor ignores 401, we handled it here.
+            // If it's another error, the interceptor (presumably) toasted it.
+          }
+        },
       });
+    } else {
+      this.toastService.error('Please fill in all required fields');
     }
   }
 }

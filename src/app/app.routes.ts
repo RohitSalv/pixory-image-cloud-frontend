@@ -5,6 +5,8 @@ import { Features } from './components/landingpage/features/features';
 import { HowItWorks } from './components/landingpage/how-it-works/how-it-works';
 import { Login } from './components/auth/login/login';
 import { Register } from './components/auth/register/register';
+import { ForgotPassword } from './components/auth/forgot-password/forgot-password';
+import { ResetPassword } from './components/auth/reset-password/reset-password';
 import { AuthGuard } from './guards/auth.guard';
 import { DocsComponent } from './components/docs/docs.component';
 import { Upload } from './components/upload/upload';
@@ -37,6 +39,14 @@ export const routes: Routes = [
     {
         path: 'register',
         component: Register
+    },
+    {
+        path: 'forgot-password',
+        component: ForgotPassword
+    },
+    {
+        path: 'reset-password',
+        component: ResetPassword
     },
     {
         path: 'docs',

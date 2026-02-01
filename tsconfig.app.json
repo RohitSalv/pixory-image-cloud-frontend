@@ -6,7 +6,13 @@
     "outDir": "./out-tsc/app",
     "types": [
       "node"
-    ]
+    ],
+    "baseUrl": "./",
+    "paths": {
+      "@environments/*": [
+        "src/environments/*"
+      ]
+    }
   },
   "include": [
     "src/**/*.ts"

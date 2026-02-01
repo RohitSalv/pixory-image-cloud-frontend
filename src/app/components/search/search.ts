@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { icons, ArrowUp, ArrowDown, ChevronLeft, ChevronRight } from 'lucide-angular';
-import { LucideAngularModule } from 'lucide-angular';
+import { LucideAngularModule, Search as SearchIcon, ArrowUp, ArrowDown, ChevronLeft, ChevronRight, Loader2, Filter, Clock, X, Sparkles, Image, Tag } from 'lucide-angular';
 import { Header } from '../landingpage/header/header';
 import { Footer } from '../landingpage/footer/footer';
-import { SearchService } from '../../services/search';
+import { SearchService } from '../../services/search.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-search',
@@ -20,25 +20,93 @@ import { SearchService } from '../../services/search';
   templateUrl: './search.html',
   styleUrl: './search.css',
 })
-export class Search {
-  icons = { ArrowUp, ArrowDown, ChevronLeft, ChevronRight }; // Make lucide icons available in the template
+export class Search implements OnInit {
+  readonly icons = {
+    Search: SearchIcon,
+    ArrowUp,
+    ArrowDown,
+    ChevronLeft,
+    ChevronRight,
+    Loader2,
+    Filter,
+    Clock,
+    X,
+    Sparkles,
+    Image,
+    Tag
+  };
 
   searchQuery: string = '';
   page: number = 0;
-  size: number = 10;
+  size: number = 12; // Increased size for better grid view
   sort: string = 'id';
-  sortOrder: 'asc' | 'desc' = 'asc';
+  sortOrder: 'asc' | 'desc' = 'desc'; // Default to newest
   searchResults: any[] = [];
   searched: boolean = false;
+  isLoading: boolean = false;
+  recentSearches: string[] = [];
 
-  constructor(private searchService: SearchService) { }
+  constructor(
+    private searchService: SearchService,
+    private toastService: ToastService
+  ) { }
+
+  ngOnInit() {
+    this.loadRecentSearches();
+  }
+
+  loadRecentSearches() {
+    const saved = localStorage.getItem('recentSearches');
+    if (saved) {
+      this.recentSearches = JSON.parse(saved);
+    }
+  }
+
+  saveRecentSearch(query: string) {
+    if (!query) return;
+    // Remove if exists to push to top
+    this.recentSearches = this.recentSearches.filter(q => q !== query);
+    this.recentSearches.unshift(query);
+    // Keep max 5
+    if (this.recentSearches.length > 5) {
+      this.recentSearches.pop();
+    }
+    localStorage.setItem('recentSearches', JSON.stringify(this.recentSearches));
+  }
+
+  removeRecentSearch(query: string, event: Event) {
+    event.stopPropagation();
+    this.recentSearches = this.recentSearches.filter(q => q !== query);
+    localStorage.setItem('recentSearches', JSON.stringify(this.recentSearches));
+  }
+
+  clearRecentSearches() {
+    this.recentSearches = [];
+    localStorage.removeItem('recentSearches');
+  }
+
+  applySearch(query: string) {
+    this.searchQuery = query;
+    this.onSearch();
+  }
+
+  clearSearch() {
+    this.searchQuery = '';
+    this.searched = false;
+    this.searchResults = [];
+  }
 
   onSearch(): void {
     if (!this.searchQuery.trim()) {
+      // If empty, reset
       this.searchResults = [];
-      this.searched = true; // Indicate that a search was attempted, but no query
+      this.searched = false;
       return;
     }
+
+    this.isLoading = true;
+    this.searched = true;
+    this.saveRecentSearch(this.searchQuery);
 
     const sortParam = `${this.sort},${this.sortOrder}`;
 
@@ -46,14 +114,14 @@ export class Search {
       .searchFiles(this.searchQuery, this.page, this.size, sortParam)
       .subscribe({
         next: (response) => {
-          this.searchResults = response.content; // Assuming the API returns a paginated response with a 'content' array
-          this.searched = true;
+          this.searchResults = response.content;
+          this.isLoading = false;
         },
         error: (error) => {
           console.error('Search error:', error);
           this.searchResults = [];
-          this.searched = true;
-          // Handle error, e.g., show an alert to the user
+          this.isLoading = false;
+          this.toastService.error('Search failed. Please try again.');
         },
       });
   }

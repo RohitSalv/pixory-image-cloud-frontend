@@ -1,16 +1,16 @@
 import { Component, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { LucideAngularModule, Sparkles } from 'lucide-angular';
-import { Router, RouterLink } from '@angular/router';
-import { AuthService } from '../../../services/auth/auth.service';
+import { LucideAngularModule, Sparkles, Menu, X } from 'lucide-angular';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
 import { Subscription } from 'rxjs';
 
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule, RouterLink],
+  imports: [CommonModule, LucideAngularModule, RouterLink, RouterLinkActive],
   templateUrl: './header.html',
   styleUrl: './header.css',
   animations: [
@@ -21,12 +21,24 @@ import { Subscription } from 'rxjs';
           style({ transform: 'translateY(0)', opacity: 1 })
         )
       ])
+    ]),
+    trigger('slideToggle', [
+      transition(':enter', [
+        style({ height: '0', opacity: 0 }),
+        animate('300ms ease-out', style({ height: '*', opacity: 1 }))
+      ]),
+      transition(':leave', [
+        animate('300ms ease-in', style({ height: '0', opacity: 0 }))
+      ])
     ])
   ]
 })
 export class Header implements OnDestroy {
 
   readonly SparklesIcon = Sparkles;
+  readonly MenuIcon = Menu;
+  readonly XIcon = X;
+  isMenuOpen = false;
 
   navLinks: { name: string; href: string; isRouterLink: boolean }[] = [];
   private authSubscription: Subscription;
@@ -78,6 +90,10 @@ export class Header implements OnDestroy {
         behavior: 'smooth'
       });
     });
+  }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
   }
 
   logout() {

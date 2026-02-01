@@ -1,7 +1,61 @@
 <div class="gallery-container">
-    <div class="max-w-7xl mx-auto px-6 py-6">
+    <div class="max-w-7xl mx-auto px-6 py-6" id="top-of-grid">
+        @if (isLoading) {
+        <div class="flex flex-col items-center justify-center min-h-[50vh]">
+            <lucide-icon [name]="icons.Loader2" class="h-10 w-10 text-blue-500 animate-spin mb-4"></lucide-icon>
+            <p class="text-muted-foreground animate-pulse">Loading your memories...</p>
+        </div>
+        } @else {
+
+        <!-- Toolbar: Count & Sort -->
+        <div
+            class="flex flex-col sm:flex-row items-center justify-between mb-8 gap-4 animate-in fade-in slide-in-from-top-4 duration-500">
+            <div
+                class="flex items-center gap-3 bg-card/40 backdrop-blur-md px-5 py-2.5 rounded-2xl border border-border/50 shadow-sm">
+                <div class="h-8 w-8 rounded-full bg-blue-500/10 flex items-center justify-center">
+                    <lucide-icon [name]="icons.Image" class="h-4 w-4 text-blue-400"></lucide-icon>
+                </div>
+                <div>
+                    <span class="block text-xs text-muted-foreground font-medium uppercase tracking-wider">Total
+                        Collection</span>
+                    <span class="block text-sm font-bold text-foreground">
+                        {{ allFiles.length }} Memories
+                    </span>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <div class="text-sm text-muted-foreground hidden sm:block">
+                    Showing {{ page * pageSize + 1 }}-{{ (page + 1) * pageSize > allFiles.length ? allFiles.length :
+                    (page + 1) * pageSize }} of {{ allFiles.length }}
+                </div>
+
+                <div class="flex items-center bg-card/40 backdrop-blur-md rounded-xl border border-border/50 p-1">
+                    <button (click)="toggleSort('date')"
+                        class="px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1"
+                        [ngClass]="{'bg-blue-500/10 text-blue-400': sortBy === 'date', 'text-muted-foreground hover:bg-muted/50': sortBy !== 'date'}">
+                        Date
+                        @if (sortBy === 'date') {
+                        <lucide-icon [name]="sortOrder === 'asc' ? icons.ArrowUp : icons.ArrowDown"
+                            class="h-3 w-3"></lucide-icon>
+                        }
+                    </button>
+                    <button (click)="toggleSort('name')"
+                        class="px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1"
+                        [ngClass]="{'bg-blue-500/10 text-blue-400': sortBy === 'name', 'text-muted-foreground hover:bg-muted/50': sortBy !== 'name'}">
+                        Name
+                        @if (sortBy === 'name') {
+                        <lucide-icon [name]="sortOrder === 'asc' ? icons.ArrowUp : icons.ArrowDown"
+                            class="h-3 w-3"></lucide-icon>
+                        }
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            @for (item of files; track item.id) {
+            @for (item of displayedFiles; track item.id) {
             <div
                 class="card group relative bg-card/30 backdrop-blur-md border border-border/40 rounded-3xl overflow-hidden hover:border-blue-500/50 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/10">
 
@@ -24,15 +78,17 @@
 
                 <div class="p-5 space-y-4">
                     <div
-                        class="meta flex items-center gap-2 text-[10px] font-medium uppercase tracking-widest text-muted-foreground/80 overflow-hidden">
-                        <span class="bg-muted/50 px-2 py-0.5 rounded">ID: {{ item.id }}</span>
-                        <span class="w-1 h-1 rounded-full bg-border"></span>
-                        <span class="truncate max-w-[100px]">{{ item.fileName }}</span>
-                        <span class="w-1 h-1 rounded-full bg-border"></span>
-                        <span class="flex items-center gap-1">
+                        class="meta flex items-center justify-between text-[10px] font-medium uppercase tracking-widest text-muted-foreground/80">
+                        <div class="flex items-center gap-2 overflow-hidden">
+                            <span class="bg-muted/50 px-2 py-0.5 rounded shrink-0">ID: {{ item.id }}</span>
+                            <span class="w-1 h-1 rounded-full bg-border shrink-0"></span>
+                            <span class="truncate max-w-[80px]" title="{{ item.fileName }}">{{ item.fileName }}</span>
+                        </div>
+
+                        <div class="flex items-center gap-1 shrink-0">
                             <lucide-icon [name]="icons.Calendar" class="h-3 w-3"></lucide-icon>
-                            {{ item.uploadTime | date:'MMM d, y' }}
-                        </span>
+                            <span>{{ (item.uploadTime | date:'MMM d, y') || 'Unknown Date' }}</span>
+                        </div>
                     </div>
 
                     <div class="section space-y-2">
@@ -80,6 +136,34 @@
             </div>
             }
         </div>
+
+        <!-- Pagination Controls -->
+        @if (displayedFiles.length > 0) {
+        <div class="flex justify-center mt-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <div
+                class="flex items-center space-x-4 bg-card/40 backdrop-blur-md border border-border/50 rounded-2xl p-1.5 shadow-lg">
+                <button (click)="prevPage()" [disabled]="page === 0"
+                    class="p-3 rounded-xl hover:bg-blue-500/10 hover:text-blue-400 disabled:opacity-30 disabled:cursor-not-allowed transition-colors text-foreground">
+                    <lucide-icon [name]="icons.ChevronLeft" class="h-5 w-5"></lucide-icon>
+                </button>
+
+                <div class="flex items-center gap-2 px-2 text-sm font-medium">
+                    <span class="text-muted-foreground">Page</span>
+                    <span
+                        class="bg-foreground text-background w-8 h-8 rounded-lg flex items-center justify-center font-bold">{{
+                        page + 1 }}</span>
+                    <span class="text-muted-foreground">of {{ totalPages }}</span>
+                </div>
+
+                <button (click)="nextPage()" [disabled]="(page + 1) * pageSize >= allFiles.length"
+                    class="p-3 rounded-xl hover:bg-blue-500/10 hover:text-blue-400 disabled:opacity-30 disabled:cursor-not-allowed transition-colors text-foreground">
+                    <lucide-icon [name]="icons.ChevronRight" class="h-5 w-5"></lucide-icon>
+                </button>
+            </div>
+        </div>
+        }
+
+        }
     </div>
 </div>
 

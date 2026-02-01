@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '@environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
-export class RetrivalService {
+export class RetrievalService {
 
-  private apiUrl = 'http://localhost:8092/api/v1/files/me';
+  private apiUrl = `${environment.filesApiUrl}/me`;
 
   constructor(private http: HttpClient) { }
 
@@ -15,6 +16,7 @@ export class RetrivalService {
   }
 
   deleteFile(id: number) {
-    return this.http.delete(`http://localhost:8092/api/v1/files/delete/${id}`);
+    return this.http.delete(`${environment.filesApiUrl}/delete/${id}`);
   }
 }
+

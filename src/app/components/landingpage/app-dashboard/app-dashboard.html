@@ -1,0 +1,55 @@
+<div class="relative">
+    <div [@hoverScale]="isHovered ? 'hovered' : 'normal'" (mouseenter)="isHovered = true"
+        (mouseleave)="isHovered = false"
+        class="relative bg-card/50 backdrop-blur-xl border border-border/50 rounded-2xl p-6 shadow-2xl transition-all">
+        <div class="space-y-4">
+            <div class="flex items-center justify-between">
+                <h3 class="text-sm font-medium text-muted-foreground">Recent Upload</h3>
+                <lucide-icon [name]="Upload" class="h-4 w-4 text-muted-foreground"></lucide-icon>
+            </div>
+
+            <div
+                class="relative aspect-video bg-gradient-to-br from-blue-500/10 to-violet-500/10 rounded-lg overflow-hidden border border-border/50">
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <lucide-icon [name]="Image" class="h-16 w-16 text-muted-foreground/30"></lucide-icon>
+                </div>
+
+                <div class="absolute top-3 right-3">
+                    <div [@pulse] class="px-2 py-1 bg-background/80 backdrop-blur-sm rounded text-xs">
+                        Processing...
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-3 pt-2">
+                <div class="flex items-start gap-3">
+                    <div class="p-2 rounded-lg bg-violet-500/10 mt-1">
+                        <lucide-icon [name]="Sparkles" class="h-4 w-4 text-violet-400"></lucide-icon>
+                    </div>
+                    <div class="flex-1 space-y-1">
+                        <p class="text-sm font-medium">AI Description</p>
+                        <p class="text-xs text-muted-foreground">
+                            "A golden retriever playing in a park during sunset,
+                            with trees in the background and autumn leaves on the ground"
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-4 p-3 bg-muted/30 rounded-lg border border-border/50">
+                    <div class="flex items-center gap-2 mb-2">
+                        <lucide-icon [name]="Search" class="h-3 w-3 text-muted-foreground"></lucide-icon>
+                        <span class="text-xs text-muted-foreground">Try searching:</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 bg-blue-500/10 text-blue-400 text-xs rounded">dog in park</span>
+                        <span class="px-2 py-1 bg-violet-500/10 text-violet-400 text-xs rounded">autumn sunset</span>
+                        <span class="px-2 py-1 bg-blue-500/10 text-blue-400 text-xs rounded">golden retriever</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="absolute -top-4 -right-4 w-24 h-24 bg-violet-500/10 rounded-full blur-2xl"></div>
+    <div class="absolute -bottom-4 -left-4 w-24 h-24 bg-blue-500/10 rounded-full blur-2xl"></div>
+</div>

@@ -1,39 +1,91 @@
-<header [@slideDown] class="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-xl">
-    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+<header [@slideDown]
+    class="sticky top-0 z-50 w-full border-b border-border/10 bg-background/60 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
-        <div class="flex items-center gap-2">
-            <div class="p-2 rounded-lg bg-gradient-to-br from-blue-500/10 to-violet-500/10 border border-blue-500/20">
-                <lucide-icon [name]="SparklesIcon" class="h-5 w-5 text-blue-400"></lucide-icon>
-            </div>
-            <span class="text-xl font-bold tracking-tight">Pixory</span>
+        <!-- Logo Section -->
+        <div class="flex items-center gap-3 group cursor-pointer" routerLink="/">
+            <img src="/pixory-logo-full-medium@4x.png" alt="Pixory"
+                class="h-8 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-sm filter brightness-110" />
         </div>
 
-        <nav class="hidden md:flex items-center gap-8">
+        <!-- Desktop Navigation -->
+        <nav
+            class="hidden md:flex items-center gap-2 bg-secondary/30 p-1.5 rounded-full border border-border/40 backdrop-blur-md">
             <a *ngFor="let link of navLinks" [routerLink]="link.isRouterLink ? link.href : null"
                 (click)="!link.isRouterLink && scrollTo(link.href)"
-                class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
+                routerLinkActive="bg-background shadow-sm text-foreground" [routerLinkActiveOptions]="{exact: true}"
+                class="px-5 py-2 rounded-full text-sm font-medium text-muted-foreground hover:text-foreground transition-all duration-300 hover:bg-muted/50 cursor-pointer relative overflow-hidden group">
                 {{ link.name }}
             </a>
         </nav>
 
-        <div class="flex items-center gap-3">
+        <!-- Auth Buttons -->
+        <div class="flex items-center gap-4">
             <ng-container *ngIf="authService.isAuthenticated(); else showAuthButtons">
                 <button (click)="logout()"
-                    class="px-5 py-2 text-sm font-medium text-white transition-all rounded-full bg-gradient-to-r from-red-600 to-red-400 hover:shadow-[0_0_20px_rgba(220,38,38,0.4)]">
+                    class="hidden md:inline-flex px-6 py-2.5 text-sm font-semibold text-white transition-all duration-300 rounded-full bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 hover:shadow-[0_0_20px_rgba(220,38,38,0.4)] hover:-translate-y-0.5 active:translate-y-0">
                     Logout
                 </button>
             </ng-container>
             <ng-template #showAuthButtons>
-                <button class="px-4 py-2 text-sm font-medium transition-colors hover:text-foreground text-muted-foreground"
-                    routerLink="/login">
-                    Sign In
-                </button>
+                <div class="hidden md:flex items-center gap-3">
+                    <button
+                        class="px-5 py-2.5 text-sm font-medium transition-colors hover:text-foreground text-muted-foreground hover:bg-secondary/50 rounded-full"
+                        routerLink="/login">
+                        Sign In
+                    </button>
 
-                <button (click)="getStarted()"
-                    class="px-5 py-2 text-sm font-medium text-white transition-all rounded-full bg-gradient-to-r from-blue-600 to-violet-600 hover:shadow-[0_0_20px_rgba(37,99,235,0.4)]">
-                    Get Started
-                </button>
+                    <button (click)="getStarted()"
+                        class="px-6 py-2.5 text-sm font-semibold text-white transition-all duration-300 rounded-full bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-500 hover:to-violet-500 hover:shadow-[0_0_25px_rgba(37,99,235,0.4)] hover:-translate-y-0.5 active:translate-y-0">
+                        Get Started
+                    </button>
+                </div>
             </ng-template>
+
+            <!-- Mobile Menu Toggle -->
+            <button (click)="toggleMenu()"
+                class="md:hidden p-2 rounded-full hover:bg-secondary/80 transition-colors border border-transparent hover:border-border/50">
+                <lucide-icon [name]="isMenuOpen ? XIcon : MenuIcon" class="h-6 w-6 text-foreground"></lucide-icon>
+            </button>
         </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div *ngIf="isMenuOpen"
+        class="md:hidden absolute top-full left-0 right-0 border-b border-border/20 bg-background/95 backdrop-blur-2xl shadow-2xl"
+        [@slideToggle]>
+        <nav class="flex flex-col p-6 gap-2">
+            <a *ngFor="let link of navLinks" [routerLink]="link.isRouterLink ? link.href : null"
+                (click)="!link.isRouterLink && scrollTo(link.href); toggleMenu()"
+                routerLinkActive="bg-blue-500/10 text-blue-400" [routerLinkActiveOptions]="{exact: true}"
+                class="p-4 rounded-xl text-base font-medium text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-all active:scale-[0.98] flex items-center justify-between group">
+                {{ link.name }}
+                <lucide-icon [name]="SparklesIcon"
+                    class="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity text-blue-400"></lucide-icon>
+            </a>
+
+            <div class="h-px bg-border/50 my-2"></div>
+
+            <ng-container *ngIf="authService.isAuthenticated(); else showAuthButtonsMobile">
+                <button (click)="logout()"
+                    class="w-full p-4 text-center font-bold text-white transition-all rounded-xl bg-gradient-to-r from-red-600 to-red-500 shadow-lg shadow-red-500/20 active:scale-[0.98]">
+                    Logout
+                </button>
+            </ng-container>
+            <ng-template #showAuthButtonsMobile>
+                <div class="grid grid-cols-2 gap-4">
+                    <button
+                        class="p-4 text-center font-medium transition-colors hover:text-foreground text-muted-foreground bg-secondary/30 hover:bg-secondary/50 rounded-xl"
+                        routerLink="/login">
+                        Sign In
+                    </button>
+
+                    <button (click)="getStarted()"
+                        class="p-4 text-center font-bold text-white transition-all rounded-xl bg-gradient-to-r from-blue-600 to-violet-600 shadow-lg shadow-blue-500/20 active:scale-[0.98]">
+                        Get Started
+                    </button>
+                </div>
+            </ng-template>
+        </nav>
     </div>
 </header>

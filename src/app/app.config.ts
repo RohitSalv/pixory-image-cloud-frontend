@@ -8,7 +8,8 @@ import {
   withInterceptors,
 } from '@angular/common/http';
 import { authInterceptor } from './interceptor/auth-interceptor';
-import { AuthService } from './services/auth/auth.service';
+import { errorInterceptor } from './interceptor/error-interceptor';
+import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
 import { provideAnimations } from '@angular/platform-browser/animations';
 
@@ -18,7 +19,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideClientHydration(),
-    provideHttpClient(withInterceptors([authInterceptor]), withFetch()),
+    provideHttpClient(withInterceptors([authInterceptor, errorInterceptor]), withFetch()),
     AuthService,
     AuthGuard,
   ],

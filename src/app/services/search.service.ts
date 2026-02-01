@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AuthService } from './auth/auth.service'; // Assuming an AuthService exists to get the token
+import { AuthService } from './auth.service'; // Assuming an AuthService exists to get the token
 
 @Injectable({
   providedIn: 'root',

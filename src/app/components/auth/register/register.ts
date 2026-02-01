@@ -17,7 +17,7 @@ import {
   Facebook,
 } from 'lucide-angular';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { AuthService } from '../../../services/auth/auth.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-register',
