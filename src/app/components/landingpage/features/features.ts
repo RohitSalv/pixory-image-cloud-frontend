@@ -37,8 +37,8 @@ export class Features {
     },
     {
       icon: Sparkles,
-      title: "Auto-Generated Albums",
-      description: "Pixory automatically organizes photos into intelligent albums based on content, people, and events.",
+      title: "Instant AI Tagging",
+      description: "No more manual labeling. Pixory generates contextual tags and descriptions for every image you upload, making browse-by-keyword a breeze.",
       gradient: "from-blue-500/10 to-blue-500/5"
     },
     {

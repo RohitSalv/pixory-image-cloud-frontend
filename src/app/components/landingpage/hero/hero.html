@@ -11,29 +11,30 @@
 
             <div [@fadeUp] class="space-y-8">
                 <div class="space-y-4">
-                    <h1 class="text-5xl md:text-6xl font-bold tracking-tight">
-                        Your private photo cloud that
-                        <span class="bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent">
-                            understands
+                    <h1 class="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1]">
+                        Your AI-powered <br />
+                        <span
+                            class="bg-gradient-to-r from-blue-400 via-violet-400 to-emerald-400 bg-clip-text text-transparent">
+                            digital sanctuary
                         </span>
-                        your images
                     </h1>
                     <p class="text-xl text-muted-foreground max-w-xl leading-relaxed">
-                        Pixory uses AI to analyze your photos, generate intelligent descriptions,
-                        and enables you to search by meaning—not filenames. Find any memory instantly.
+                        Designed for privacy. Driven by intelligence. Pixory seamlessly organizes your memories using
+                        advanced AI,
+                        enabling semantic search that understands the soul of your photos.
                     </p>
                 </div>
 
                 <div class="flex flex-wrap gap-4">
-                    <button routerLink="/home"
+                    <button routerLink="/explore"
                         class="group flex items-center px-6 py-3 text-white font-medium rounded-full bg-gradient-to-r from-blue-600 to-violet-600 hover:opacity-90 transition-all shadow-lg shadow-blue-500/20">
                         Get Started Free
                         <lucide-icon [name]="icons.ArrowRight"
                             class="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform"></lucide-icon>
                     </button>
-                    <button routerLink="/how-it-works"
+                    <button routerLink="/docs"
                         class="px-6 py-3 border border-border bg-background/50 hover:bg-accent hover:text-accent-foreground font-medium rounded-full transition-colors backdrop-blur-sm">
-                        See How It Works
+                        View Documentation
                     </button>
                 </div>
 

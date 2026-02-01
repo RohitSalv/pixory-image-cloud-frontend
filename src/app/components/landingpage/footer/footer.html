@@ -1,17 +1,16 @@
 <footer class="border-t border-border/50 px-6 py-10 bg-background/50 backdrop-blur-md">
+    <!-- Footer Rendering Verify -->
     <div class="max-w-7xl mx-auto">
         <div class="grid md:grid-cols-5 gap-12 mb-10">
 
             <div class="md:col-span-1 space-y-4">
-                <div class="flex items-center gap-2">
-                    <div
-                        class="p-2 rounded-lg bg-gradient-to-br from-blue-500/10 to-violet-500/10 border border-blue-500/10">
-                        <lucide-icon [name]="icons.Sparkles" class="h-5 w-5 text-foreground"></lucide-icon>
-                    </div>
-                    <span class="text-xl font-bold tracking-tight">Pixory</span>
+                <div class="flex items-center gap-3 cursor-pointer" routerLink="/">
+                    <img src="/pixory-icon-small@4x.png" alt="Pixory Icon" class="h-8 w-8 object-contain" />
+                    <span
+                        class="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70">Pixory</span>
                 </div>
                 <p class="text-sm text-muted-foreground leading-relaxed">
-                    Your private photo cloud that understands your images.
+                    Designed for privacy. Driven by intelligence. Your memories, properly protected.
                 </p>
 
                 <div class="flex gap-3">
@@ -33,12 +32,14 @@
                 </div>
             </div>
 
+            <div *ngIf="categories.length === 0" class="text-red-500">No categories found</div>
             <div *ngFor="let category of categories" class="space-y-4">
                 <h4 class="font-semibold text-sm uppercase tracking-wider text-foreground">{{ category }}</h4>
                 <ul class="space-y-2">
                     <li *ngFor="let item of links[category]">
-                        <a href="#" class="text-sm text-muted-foreground hover:text-blue-400 transition-colors">
-                            {{ item }}
+                        <a [routerLink]="item.route" [fragment]="item.fragment" [href]="item.href || '#'"
+                            class="text-sm text-muted-foreground hover:text-blue-400 transition-colors cursor-pointer">
+                            {{ item.name }}
                         </a>
                     </li>
                 </ul>

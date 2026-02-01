@@ -1,25 +1,50 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LucideAngularModule, Sparkles, Github, Twitter, Linkedin } from 'lucide-angular';
+import { RouterLink } from '@angular/router';
+
+export interface FooterLink {
+  name: string;
+  route: string | null;
+  fragment?: string;
+  href?: string;
+}
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule],
+  imports: [CommonModule, LucideAngularModule, RouterLink],
   templateUrl: './footer.html'
 })
 export class Footer {
   readonly icons = { Sparkles, Github, Twitter, Linkedin };
 
-  links = {
-    Product: ["Features", "Pricing", "API", "Changelog"],
-    Resources: ["Documentation", "Blog", "Support", "Status"],
-    Company: ["About", "Privacy", "Terms", "Contact"],
-    Developers: ["GitHub", "API Docs", "Self-Hosting", "Contributing"]
+  links: Record<string, FooterLink[]> = {
+    Product: [
+      { name: "Features", route: "/", fragment: "features" },
+      { name: "Live Demo", route: "/", fragment: "live-demo" },
+      { name: "Pricing", route: null },
+      { name: "Changelog", route: null }
+    ],
+    Resources: [
+      { name: "Documentation", route: "/docs" },
+      { name: "Help Center", route: null },
+      { name: "Safety", route: null },
+      { name: "Status", route: null }
+    ],
+    Company: [
+      { name: "About", route: null },
+      { name: "Privacy", route: null },
+      { name: "Terms", route: null },
+      { name: "Contact", route: null }
+    ],
+    Developers: [
+      { name: "GitHub", href: "https://github.com/RohitSalv/pixory-image-cloud-backend", route: null },
+      { name: "API Docs", route: null },
+      { name: "Self-Hosting", route: null },
+      { name: "Contributing", route: null }
+    ]
   };
 
-  // Helper for Angular's *ngFor to iterate over object keys
-  get categories() {
-    return Object.keys(this.links) as Array<keyof typeof this.links>;
-  }
+  categories = ['Product', 'Resources', 'Company', 'Developers'];
 }

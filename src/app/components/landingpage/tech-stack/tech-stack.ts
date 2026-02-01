@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LucideAngularModule, Database, Brain, Search, Cloud } from 'lucide-angular';
+import { LucideAngularModule, Database, Brain, Search, Cloud, Sparkles } from 'lucide-angular';
 
 @Component({
   selector: 'app-tech-stack',
@@ -12,23 +12,28 @@ export class TechStack {
   stack = [
     {
       icon: Brain,
-      label: "Vision AI",
-      tech: "Advanced ML"
+      label: "AI Core",
+      tech: "ML Powered"
     },
     {
       icon: Search,
-      label: "Vector Search",
-      tech: "Semantic Index"
+      label: "Smart Search",
+      tech: "Semantic"
     },
     {
       icon: Database,
-      label: "PostgreSQL",
-      tech: "Reliable Storage"
+      label: "Storage",
+      tech: "Cloud Native"
+    },
+    {
+      icon: Sparkles, // Using Sparkles for the modern frontend
+      label: "Angular 20",
+      tech: "Signals Architecture"
     },
     {
       icon: Cloud,
-      label: "Cloud Native",
-      tech: "Scalable Infrastructure"
+      label: "Tailwind 4",
+      tech: "High-Performance CSS"
     }
   ];
 }

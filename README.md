@@ -1,84 +1,103 @@
-# Pixory – Image Cloud Frontend
+# Pixory – Intelligent Image Cloud
 
-Pixory is a modern frontend application that provides a clean interface for uploading, browsing, and managing AI-enriched images.
-
-This repository contains the user-facing application built to consume the Pixory backend APIs.
+Pixory is a premium, AI-powered digital sanctuary for your memories. It provides a stunning, glassmorphism-inspired interface for uploading, browsing, and searching images enriched with natural language descriptions and semantic tags.
 
 ---
 
-## Responsibilities
+## 🚀 Features
 
-- Image upload interface with preview
-- Responsive image gallery
-- Display of AI-generated descriptions and tags
-- Landing page and product flow
-- User interaction and feedback handling
-
----
-
-## Tech Stack
-
-- Angular 20+
-- Tailwind CSS v4
-- RxJS
-- Angular Animations
-- Lucide Angular Icons
+- **Intelligent Upload**: Multi-format support with instant AI analysis.
+- **AI Descriptions**: Natural language summaries generated for every image.
+- **Smart Search**: Semantic search capabilities—find photos by content, not just filenames.
+- **Dynamic Gallery**: Beautiful, responsive grid with advanced sorting and pagination.
+- **Glassmorphism UI**: High-end aesthetic with subtle animations and dark-mode optimization.
+- **Secure Storage**: Fully authenticated private cloud experience.
+- **Comprehensive Docs**: Built-in documentation for seamless onboarding.
 
 ---
 
-## UX Philosophy
+## 🛠 Tech Stack
+
+- **Angular 20**: Leveraging the latest signals-based architecture and standalone components.
+- **Tailwind CSS v4**: Modern utility-first styling with high-performance JIT compilation.
+- **Lucide Icons**: Crisp, scalable vector iconography.
+- **RxJS**: Reactive state management for smooth asynchronous data flows.
+- **Node.js SSR**: Server-side rendering support for optimized initial load and SEO.
+
+---
+
+## 🎨 UX Philosophy
 
 Pixory follows a "single-flow" design approach where the landing experience transitions seamlessly into the application dashboard.
 
-Design principles:
-- Minimal visual noise
-- Calm feedback over aggressive loaders
-- Dark-mode-first UI
-- Clear visual hierarchy
+**Design principles**:
+- **Glassmorphism**: Minimalist blur effects for a layered, premium feel.
+- **Calm Feedback**: Subtle micro-animations instead of aggressive loaders.
+- **Dark-First**: Optimized for a luxurious dark aesthetic.
+- **Mobile-Responsive**: Fluid layouts across all device sizes.
 
 ---
 
-## Key UI Decisions
+## ⚙️ Configuration
 
-### Why No Upload Progress Bar?
-For small-to-medium image uploads, progress bars added unnecessary complexity without improving clarity. A buffered success/error state provided a calmer and more intentional experience.
+Pixory uses environment variables for easy configuration. Create a `.env` file in the root directory:
 
-### Why CSS Grid Instead of Flexbox?
-CSS Grid enabled responsive layouts without forcing uniform card heights, allowing image content to dictate layout naturally.
+```env
+# API Configuration
+BACKEND_API_URL=http://localhost:8092/api
+AUTH_API_URL=http://localhost:8092/api/auth
+FILES_API_URL=http://localhost:8092/api/v1/files
 
-### Why Strong Typing in Templates?
-Typed interfaces prevent runtime template errors and improve maintainability as the data model evolves.
-
----
-
-## Application Flow
-
-1. User uploads an image
-2. Local preview is shown instantly using FileReader
-3. Image is sent to the backend API
-4. Gallery updates with AI-enriched metadata
-5. Users can browse, view, and manage images
+# Application Settings
+PRODUCTION=false
+```
 
 ---
 
-## Backend Dependency
+## 🏗 Getting Started
 
-This frontend consumes the Pixory backend REST APIs.
+### Prerequisites
 
-Backend repository:
-👉 https://github.com/RohitSalv/pixory-image-cloud-backend
+- Node.js (v18+)
+- Angular CLI
+- Pixory Backend running locally
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/RohitSalv/pixory-image-cloud-frontend.git
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm start
+   ```
+4. Open your browser at `http://localhost:4200`
 
 ---
 
-## Project Status
+## 🔗 Backend Dependency
 
-- Landing page & UI flow: ✅ Complete
-- Image gallery: ✅ Stable
-- Upload interface: ✅ Optimized
-- Advanced search & filters: 🚧 Planned
+This frontend is designed to work with the Pixory Backend Service.
+
+👉 [View Backend Repository](https://github.com/RohitSalv/pixory-image-cloud-backend)
 
 ---
 
-## License
+## 📊 Project Status
+
+- [x] **Branding & UI System**: Optimized for luxury feel.
+- [x] **Core Gallery**: Implemented with pagination and sorting.
+- [x] **Smart Search**: Fully functional semantic search.
+- [x] **Cloud Integration**: Stable upload and retrieval.
+- [x] **Documentation**: Comprehensive feature guides.
+
+---
+
+## 📄 License
 
 This project is intended for learning, portfolio demonstration, and experimentation.

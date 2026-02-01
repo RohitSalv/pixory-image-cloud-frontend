@@ -1,13 +1,29 @@
 <app-header></app-header>
-<main>
-    <app-hero></app-hero>
-    <app-live-demo></app-live-demo>
-    <app-features></app-features>
-    <app-why-pixory></app-why-pixory>
-    <app-use-cases></app-use-cases>
-    <app-how-it-works></app-how-it-works>
-    <app-privacy></app-privacy>
-    <app-tech-stack></app-tech-stack>
-    <app-final-cta></app-final-cta>
-</main>
+
+<div class="relative bg-background overflow-hidden">
+    <!-- Blurry Blobs Background -->
+    <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+        <div class="absolute top-[10%] left-0 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[130px] opacity-40">
+        </div>
+        <div
+            class="absolute top-[40%] right-0 w-[600px] h-[600px] bg-violet-500/5 rounded-full blur-[130px] opacity-40">
+        </div>
+        <div
+            class="absolute bottom-[20%] left-[20%] w-[500px] h-[500px] bg-emerald-500/5 rounded-full blur-[130px] opacity-30">
+        </div>
+    </div>
+
+    <main class="relative z-10">
+        <app-hero></app-hero>
+        <app-live-demo></app-live-demo>
+        <app-features></app-features>
+        <app-why-pixory></app-why-pixory>
+        <app-use-cases></app-use-cases>
+        <app-how-it-works></app-how-it-works>
+        <app-privacy></app-privacy>
+        <app-tech-stack></app-tech-stack>
+        <app-final-cta></app-final-cta>
+    </main>
+</div>
+
 <app-footer></app-footer>
