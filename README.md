@@ -44,9 +44,9 @@ Pixory uses environment variables for easy configuration. Create a `.env` file i
 
 ```env
 # API Configuration
-BACKEND_API_URL=http://localhost:8092/api
-AUTH_API_URL=http://localhost:8092/api/auth
-FILES_API_URL=http://localhost:8092/api/v1/files
+BACKEND_API_URL=https://pixory-image-cloud-backend.onrender.com/api
+AUTH_API_URL=https://pixory-image-cloud-backend.onrender.com/api/auth
+FILES_API_URL=https://pixory-image-cloud-backend.onrender.com/api/v1/files
 
 # Application Settings
 PRODUCTION=false
@@ -60,7 +60,7 @@ PRODUCTION=false
 
 - Node.js (v18+)
 - Angular CLI
-- Pixory Backend running locally
+- Pixory Backend (Local or Hosted at https://pixory-image-cloud-backend.onrender.com)
 
 ### Installation
 
@@ -80,6 +80,21 @@ PRODUCTION=false
 
 ---
 
+## 🚀 Deployment (Vercel)
+
+Pixory is optimized for deployment on **Vercel**. 
+
+1. **Connect to GitHub**: Import your repository into Vercel.
+2. **Framework Preset**: Ensure "Angular" is selected.
+3. **Environment Variables**: Add the following variables in the Vercel dashboard (from your `.env`):
+   - `BACKEND_API_URL`: `https://pixory-image-cloud-backend.onrender.com/api`
+   - `AUTH_API_URL`: `https://pixory-image-cloud-backend.onrender.com/api/auth`
+   - `FILES_API_URL`: `https://pixory-image-cloud-backend.onrender.com/api/v1/files`
+4. **Deploy**: Click "Deploy". Vercel will automatically handle the SSR build and serverless function setup.
+
+
+---
+
 ## 🔗 Backend Dependency
 
 This frontend is designed to work with the Pixory Backend Service.
@@ -94,6 +109,7 @@ This frontend is designed to work with the Pixory Backend Service.
 - [x] **Core Gallery**: Implemented with pagination and sorting.
 - [x] **Smart Search**: Fully functional semantic search.
 - [x] **Cloud Integration**: Stable upload and retrieval.
+- [x] **Deployment Ready**: Configured for Vercel SSR.
 - [x] **Documentation**: Comprehensive feature guides.
 
 ---

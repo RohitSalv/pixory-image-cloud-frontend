@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  backendApiUrl: 'http://your-production-backend-url/api',
-  authApiUrl: 'http://your-production-backend-url/api/auth',
-  filesApiUrl: 'http://your-production-backend-url/api/v1/files'
+  backendApiUrl: 'https://pixory-image-cloud-backend.onrender.com/api',
+  authApiUrl: 'https://pixory-image-cloud-backend.onrender.com/api/auth',
+  filesApiUrl: 'https://pixory-image-cloud-backend.onrender.com/api/v1/files'
 };
